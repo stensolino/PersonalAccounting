@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting", "PersonalAccounting\PersonalAccounting.csproj", "{EB531371-2B2B-435B-8933-C6AD2C7B75BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Domain", "PersonalAccounting.Domain\PersonalAccounting.Domain.csproj", "{87E3118F-53DD-4EEF-9C60-0EA152E263B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Database", "PersonalAccounting.Database\PersonalAccounting.Database.csproj", "{A40362F5-1F49-4658-A356-82FED0E79385}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{EB531371-2B2B-435B-8933-C6AD2C7B75BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB531371-2B2B-435B-8933-C6AD2C7B75BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB531371-2B2B-435B-8933-C6AD2C7B75BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E3118F-53DD-4EEF-9C60-0EA152E263B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E3118F-53DD-4EEF-9C60-0EA152E263B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E3118F-53DD-4EEF-9C60-0EA152E263B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E3118F-53DD-4EEF-9C60-0EA152E263B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A40362F5-1F49-4658-A356-82FED0E79385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A40362F5-1F49-4658-A356-82FED0E79385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A40362F5-1F49-4658-A356-82FED0E79385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A40362F5-1F49-4658-A356-82FED0E79385}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
