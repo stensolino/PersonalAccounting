@@ -25,13 +25,16 @@ namespace PersonalAccounting
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<User>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddRazorPages();
+            
             services.AddServerSideBlazor();
+            
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
+            
             services.AddSingleton<WeatherForecastService>();
         }
 
@@ -51,11 +54,13 @@ namespace PersonalAccounting
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
-
+            
             app.UseRouting();
-
+            
             app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
