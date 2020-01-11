@@ -1,0 +1,11 @@
+﻿using System.Collections.Generic;
+
+namespace PersonalAccounting.Domain.Entities
+{
+    public class Budget : BaseEntity
+    {
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+    }
+}

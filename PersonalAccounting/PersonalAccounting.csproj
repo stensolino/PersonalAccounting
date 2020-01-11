@@ -22,4 +22,8 @@
     <ProjectReference Include="..\PersonalAccounting.Database\PersonalAccounting.Database.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
 </Project>

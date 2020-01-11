@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PersonalAccounting.Areas.Identity;
 using PersonalAccounting.Data;
+using PersonalAccounting.Database;
 using PersonalAccounting.Domain.Entities;
 
 namespace PersonalAccounting
@@ -24,12 +25,12 @@ namespace PersonalAccounting
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<IAppDbContext, ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDbContext>();
             
-            services.AddRazorPages();
+            //services.AddRazorPages();
             
             services.AddServerSideBlazor();
             
