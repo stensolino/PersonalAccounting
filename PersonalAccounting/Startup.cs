@@ -29,9 +29,9 @@ namespace PersonalAccounting
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDbContext>();
-            
-            //services.AddRazorPages();
-            
+
+            services.AddRazorPages();
+
             services.AddServerSideBlazor();
             
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
