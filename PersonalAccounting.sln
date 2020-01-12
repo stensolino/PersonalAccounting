@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting", "PersonalAccounting\PersonalAccounting.csproj", "{EB531371-2B2B-435B-8933-C6AD2C7B75BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting", "PersonalAccounting\PersonalAccounting.csproj", "{EB531371-2B2B-435B-8933-C6AD2C7B75BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Domain", "PersonalAccounting.Domain\PersonalAccounting.Domain.csproj", "{87E3118F-53DD-4EEF-9C60-0EA152E263B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Domain", "PersonalAccounting.Domain\PersonalAccounting.Domain.csproj", "{87E3118F-53DD-4EEF-9C60-0EA152E263B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Database", "PersonalAccounting.Database\PersonalAccounting.Database.csproj", "{A40362F5-1F49-4658-A356-82FED0E79385}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Database", "PersonalAccounting.Database\PersonalAccounting.Database.csproj", "{A40362F5-1F49-4658-A356-82FED0E79385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Web", "PersonalAccounting.Web\PersonalAccounting.Web.csproj", "{C0F6BFD8-5564-4A85-BAF7-A52B78241156}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{A40362F5-1F49-4658-A356-82FED0E79385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A40362F5-1F49-4658-A356-82FED0E79385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A40362F5-1F49-4658-A356-82FED0E79385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F6BFD8-5564-4A85-BAF7-A52B78241156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F6BFD8-5564-4A85-BAF7-A52B78241156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F6BFD8-5564-4A85-BAF7-A52B78241156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F6BFD8-5564-4A85-BAF7-A52B78241156}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
