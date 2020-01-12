@@ -25,17 +25,19 @@ namespace PersonalAccounting
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IAppDbContext, ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddCognitoIdentity();
 
             services.AddRazorPages();
 
             services.AddServerSideBlazor();
-            
+
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<User>>();
-            
+
             services.AddSingleton<WeatherForecastService>();
         }
 
@@ -55,13 +57,13 @@ namespace PersonalAccounting
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseStaticFiles();
-            
+
             app.UseRouting();
-            
+
             app.UseAuthentication();
-            
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
