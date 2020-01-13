@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PersonalAccounting.Domain.Entities
 {
-    public class User : IdentityUser<int>
+    public class User
     {
         public virtual ICollection<Budget> Budgets { get; set; }
     }
