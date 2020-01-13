@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PersonalAccounting.Domain.Entities;
 
 namespace PersonalAccounting.Database
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, int>//, IAppDbContext
+    public class ApplicationDbContext : DbContext//, IAppDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
