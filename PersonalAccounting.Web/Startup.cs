@@ -2,6 +2,7 @@ using Amazon.Extensions.CognitoAuthentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,7 @@ namespace PersonalAccounting.Web
             //        Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddCognitoIdentity();
             services.AddRazorPages();
             services.AddServerSideBlazor();
