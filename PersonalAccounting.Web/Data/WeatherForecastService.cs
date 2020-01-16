@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using PersonalAccounting.Web.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +10,11 @@ namespace PersonalAccounting.Web.Data
     public class WeatherForecastService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public WeatherForecastService(IHttpContextAccessor httpContextAccessor)
+        private readonly IBudgetService _budgetService;
+        public WeatherForecastService(IHttpContextAccessor httpContextAccessor, IBudgetService budgetService)
         {
             _httpContextAccessor = httpContextAccessor;
+            _budgetService = budgetService;
         }
 
         private static readonly string[] Summaries = new[]
@@ -23,6 +26,8 @@ namespace PersonalAccounting.Web.Data
         {
             // Example: Get access_token - user has to be signed in
             var accessToken = _httpContextAccessor.HttpContext.GetTokenAsync("access_token").Result;
+            // Example: HttpClient request
+            _budgetService.GetBudget(1);
 
             var rng = new Random();
             return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast

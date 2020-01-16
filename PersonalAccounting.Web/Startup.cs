@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PersonalAccounting.Web.Areas.Identity;
 using PersonalAccounting.Web.Data;
+using PersonalAccounting.Web.Services;
+using System;
 
 namespace PersonalAccounting.Web
 {
@@ -33,8 +35,15 @@ namespace PersonalAccounting.Web
             services.AddCognitoIdentity();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddHttpClient("personal-accounting-api", c =>
+            {
+                c.BaseAddress = new Uri("https://reqres.in/api/");
+                c.DefaultRequestHeaders.Add("Authorization","Bearer dfo3arfk443qf43jk4r");
+            });
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
             services.AddSingleton<WeatherForecastService>();
+            services.AddTransient<IBudgetService, BudgetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
