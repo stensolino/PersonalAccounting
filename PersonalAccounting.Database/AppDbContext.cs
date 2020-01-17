@@ -1,15 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalAccounting.Domain.Entities;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Database
 {
-    public class ApplicationDbContext : DbContext//, IAppDbContext
+    public class AppDbContext : DbContext, IAppDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
@@ -17,8 +20,13 @@ namespace PersonalAccounting.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Seed();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
