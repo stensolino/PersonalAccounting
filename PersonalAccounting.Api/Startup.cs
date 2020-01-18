@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using PersonalAccounting.Api.Services;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Database;
@@ -28,7 +29,8 @@ namespace PersonalAccounting.Api
 
             services.AddScoped<IBudgetService, BudgetService>();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddSwaggerGen(c =>
             {

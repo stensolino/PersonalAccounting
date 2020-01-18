@@ -18,14 +18,18 @@ namespace PersonalAccounting.Api.Services
 
         public async Task<IEnumerable<Budget>> GetAll()
         {
-            var result = await _appDbContext.Budgets.ToListAsync(); ;
+            var result = await _appDbContext.Budgets
+                .Include(i => i.User)
+                .ToListAsync();
 
             return result;
         }
 
         public async Task<Budget> GetById(int id)
         {
-            var result = await _appDbContext.Budgets.FirstOrDefaultAsync(b => b.Id == id);
+            var result = await _appDbContext.Budgets
+                .Include(i => i.User)
+                .FirstOrDefaultAsync(b => b.Id == id);
 
             return result;
         }
@@ -52,7 +56,7 @@ namespace PersonalAccounting.Api.Services
         {
             var budget = await _appDbContext.Budgets.FindAsync(id);
             _appDbContext.Budgets.Remove(budget);
-            
+
             await _appDbContext.SaveChangesAsync();
 
             return budget;
