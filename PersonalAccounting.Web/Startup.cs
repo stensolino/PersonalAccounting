@@ -10,6 +10,7 @@ using PersonalAccounting.Web.Areas.Identity;
 using PersonalAccounting.Web.Data;
 using PersonalAccounting.Web.Services;
 using System;
+using System.Net.Http.Headers;
 
 namespace PersonalAccounting.Web
 {
@@ -38,8 +39,9 @@ namespace PersonalAccounting.Web
 
             services.AddHttpClient("personal-accounting-api", c =>
             {
-                c.BaseAddress = new Uri("https://reqres.in/api/");
-                c.DefaultRequestHeaders.Add("Authorization","Bearer dfo3arfk443qf43jk4r");
+                c.BaseAddress = new Uri("https://localhost:5011/api/");
+                //c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //c.DefaultRequestHeaders.Add("Authorization", "Bearer dfo3arfk443qf43jk4r");
             });
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
             services.AddSingleton<WeatherForecastService>();
