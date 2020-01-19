@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PersonalAccounting.Web.Services
+namespace PersonalAccounting.Web.Services.Interfaces
 {
     public interface IBudgetService
     {

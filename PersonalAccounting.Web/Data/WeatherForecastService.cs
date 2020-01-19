@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using PersonalAccounting.Web.Services;
+using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,8 +25,6 @@ namespace PersonalAccounting.Web.Data
 
         public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
-            // Example: Get access_token - user has to be signed in
-            var accessToken = _httpContextAccessor.HttpContext.GetTokenAsync("access_token").Result;
             // Example: HttpClient request
             _budgetService.GetBudget(1);
 

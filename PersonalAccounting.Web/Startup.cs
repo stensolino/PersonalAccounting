@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PersonalAccounting.Domain;
 using PersonalAccounting.Web.Areas.Identity;
 using PersonalAccounting.Web.Data;
+using PersonalAccounting.Web.Handlers;
 using PersonalAccounting.Web.Services;
+using PersonalAccounting.Web.Services.Interfaces;
 using System;
-using System.Net.Http.Headers;
 
 namespace PersonalAccounting.Web
 {
@@ -37,12 +39,12 @@ namespace PersonalAccounting.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddHttpClient("personal-accounting-api", c =>
+            services.AddTransient<HttpClientMessageHandlers>();
+            services.AddHttpClient(Constants.PersonalAccountingApi, c =>
             {
                 c.BaseAddress = new Uri("https://localhost:5011/api/");
-                //c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //c.DefaultRequestHeaders.Add("Authorization", "Bearer dfo3arfk443qf43jk4r");
-            });
+            }).AddHttpMessageHandler<HttpClientMessageHandlers>();
+
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IBudgetService, BudgetService>();

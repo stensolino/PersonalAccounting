@@ -1,4 +1,6 @@
-﻿using PersonalAccounting.Domain.Entities;
+﻿using Microsoft.Extensions.Logging;
+using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Net.Http;
 using System.Text.Json;
@@ -6,36 +8,31 @@ using System.Threading.Tasks;
 
 namespace PersonalAccounting.Web.Services
 {
-    public class BudgetService : IBudgetService
+    public class BudgetService : BaseService, IBudgetService
     {
-        private readonly HttpClient _httpClient;
-        private readonly JsonSerializerOptions _jsonSerializerOptions;
+        private readonly ILogger<BudgetService> _logger;
 
-        public BudgetService(IHttpClientFactory clientFactory)
+        public BudgetService(ILogger<BudgetService> logger, IHttpClientFactory clientFactory) 
+            : base(clientFactory)
         {
-            _httpClient = clientFactory.CreateClient("personal-accounting-api");
-            _jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            _logger = logger;
         }
 
         public async Task GetBudget(int id)
         {
-            var response = await _httpClient.GetAsync($"budgets/{id}");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                try
+                var response = await _httpClient.GetAsync($"budgets/{id}");
+                if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
                     var budget = JsonSerializer.Deserialize<Budget>(responseString, _jsonSerializerOptions);
-
-                    //using var responseStream = await response.Content.ReadAsStreamAsync();
-                    //var users = await JsonSerializer.DeserializeAsync<UserTest>(responseStream);
                 }
-                catch (Exception ex)
-                {
-
-                    throw;
-                }
-
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("GetBudget throw error", ex.Message);
+                throw;
             }
         }
     }
