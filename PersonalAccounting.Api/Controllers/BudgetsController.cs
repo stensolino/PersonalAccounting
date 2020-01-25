@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Entities;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace PersonalAccounting.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class BudgetsController : ControllerBase
     {
@@ -26,7 +28,7 @@ namespace PersonalAccounting.Api.Controllers
             return Ok(budgets);
         }
 
-        // GET: api/Budgets/5
+        // GET: api/Budgets/5        
         [HttpGet("{id}")]
         public async Task<ActionResult<Budget>> GetBudget(int id)
         {

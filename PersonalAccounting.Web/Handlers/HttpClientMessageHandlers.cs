@@ -20,13 +20,13 @@ namespace PersonalAccounting.Web.Handlers
         protected async override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var accessToken = _httpContextAccessor.HttpContext.GetTokenAsync(Constants.AccessToken).Result;
-            if (!string.IsNullOrWhiteSpace(accessToken))
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var idToken = _httpContextAccessor.HttpContext.GetTokenAsync(Constants.IdToken).Result;
 
-            var response = await base.SendAsync(request, cancellationToken);
+            if (!string.IsNullOrWhiteSpace(idToken))
+                request.Headers.Authorization = new AuthenticationHeaderValue(
+                    Constants.JwtBearerDefaultsAuthenticationScheme, idToken);
 
-            return response;
+            return await base.SendAsync(request, cancellationToken);
         }
     }
 }
