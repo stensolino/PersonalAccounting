@@ -31,7 +31,7 @@ namespace PersonalAccounting.Web.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError("GetBudget throw error", ex.Message);
+                _logger.LogError("GetBudget throw an error", ex.Message);
                 throw;
             }
         }
