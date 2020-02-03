@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PersonalAccounting.Domain;
 using PersonalAccounting.Web.Areas.Identity;
-using PersonalAccounting.Web.Data;
 using PersonalAccounting.Web.Handlers;
 using PersonalAccounting.Web.Services;
 using PersonalAccounting.Web.Services.Interfaces;
@@ -46,7 +45,6 @@ namespace PersonalAccounting.Web
             }).AddHttpMessageHandler<HttpClientMessageHandlers>();
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
-            services.AddSingleton<WeatherForecastService>();
             services.AddTransient<IBudgetService, BudgetService>();
         }
 

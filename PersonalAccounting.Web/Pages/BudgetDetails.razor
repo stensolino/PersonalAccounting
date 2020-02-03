@@ -1,0 +1,24 @@
+﻿@page "/budget"
+
+@using PersonalAccounting.Domain.Entities
+@using PersonalAccounting.Web.Services.Interfaces
+@inject IBudgetService  budgetService
+
+<h3>BudgetDetails</h3>
+<div>
+    @if (_budget is { })
+    {
+        <p>@_budget.Id</p>
+        <p>@_budget.UpdatedAt</p>
+    }
+
+</div>
+
+@code {
+    private Budget _budget;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _budget = await budgetService.GetBudget(1);
+    }
+}

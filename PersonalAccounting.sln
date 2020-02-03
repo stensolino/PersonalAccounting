@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Database
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Web", "PersonalAccounting.Web\PersonalAccounting.Web.csproj", "{C0F6BFD8-5564-4A85-BAF7-A52B78241156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Api", "PersonalAccounting.Api\PersonalAccounting.Api.csproj", "{B3094DDB-3C9D-446A-9A5A-5A78641E3834}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Api", "PersonalAccounting.Api\PersonalAccounting.Api.csproj", "{B3094DDB-3C9D-446A-9A5A-5A78641E3834}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

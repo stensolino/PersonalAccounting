@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace PersonalAccounting.Web.Services
 {
-    public class BaseService : IBaseService
+    public class BaseService// : IBaseService
     {
         protected readonly HttpClient _httpClient;
         protected readonly JsonSerializerOptions _jsonSerializerOptions;

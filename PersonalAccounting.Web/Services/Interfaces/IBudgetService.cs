@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using PersonalAccounting.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Web.Services.Interfaces
 {
     public interface IBudgetService
     {
-        Task GetBudget(int id);
+        Task<Budget> GetBudget(int id);
     }
 }

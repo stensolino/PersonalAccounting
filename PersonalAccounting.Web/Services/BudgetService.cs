@@ -12,13 +12,13 @@ namespace PersonalAccounting.Web.Services
     {
         private readonly ILogger<BudgetService> _logger;
 
-        public BudgetService(ILogger<BudgetService> logger, IHttpClientFactory clientFactory) 
+        public BudgetService(ILogger<BudgetService> logger, IHttpClientFactory clientFactory)
             : base(clientFactory)
         {
             _logger = logger;
         }
 
-        public async Task GetBudget(int id)
+        public async Task<Budget> GetBudget(int id)
         {
             try
             {
@@ -27,7 +27,9 @@ namespace PersonalAccounting.Web.Services
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
                     var budget = JsonSerializer.Deserialize<Budget>(responseString, _jsonSerializerOptions);
+                    return budget;
                 }
+                return null;
             }
             catch (Exception ex)
             {
