@@ -4,14 +4,62 @@
 @using PersonalAccounting.Web.Services.Interfaces
 @inject IBudgetService  budgetService
 
-<h3>BudgetDetails</h3>
-<div>
-    @if (_budget is { })
-    {
-        <p>@_budget.Id</p>
-        <p>@_budget.UpdatedAt</p>
-    }
 
+<div class="row">
+    <div class="col-sm-12">
+        <h3>BudgetDetails</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        @if (_budget is null)
+        {
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        }
+        else
+        {
+            <dl class="row">
+                @foreach (var category in _budget.Categories)
+                {
+
+                    <dd class="col-sm-3">@String.Format("{0:dd/MM/yyyy}", @category.CreatedAt)</dd>
+                    <dd class="col-sm-3">@category.Name</dd>
+                    <dd class="col-sm-6">
+                        <dl class="row">
+                            @foreach (var transaction in category.Transactions)
+                            {
+                                <dd class="col-sm-8">@transaction.Note</dd>
+                                <dd class="col-sm-4 text-right">@transaction.Amount KM</dd>
+                            }
+                        </dl>
+                    </dd>
+                }
+            </dl>
+        }
+    </div>
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                @if (_budget is null)
+                {
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                }
+                else
+                {
+                    <h5 class="card-title">Group Report</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Total groups: @_budget.Categories.Count()</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -20,5 +68,16 @@
     protected override async Task OnInitializedAsync()
     {
         _budget = await budgetService.GetBudget(1);
+
+        //var query = _budget.Categories
+        //    .GroupBy(o => new { o.BudgetId })
+        //    .Select(g => new
+        //    {
+        //        g.Key.BudgetId,
+        //    //Sum = g.Sum(o => o.Transactions .Amount),
+        //    //Min = g.Min(o => o.Amount),
+        //    //Max = g.Max(o => o.Amount),
+        //    //Avg = g.Average(o => o.Amount)
+        //});
     }
 }

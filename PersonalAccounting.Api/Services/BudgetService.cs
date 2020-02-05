@@ -29,6 +29,8 @@ namespace PersonalAccounting.Api.Services
         {
             var result = await _appDbContext.Budgets
                 .Include(i => i.User)
+                .Include(i => i.Categories)
+                    .ThenInclude(r => r.Transactions)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
             return result;
