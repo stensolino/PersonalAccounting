@@ -6,6 +6,6 @@ namespace PersonalAccounting.Domain.Entities
     {
         public int UserId { get; set; }
         public User User { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

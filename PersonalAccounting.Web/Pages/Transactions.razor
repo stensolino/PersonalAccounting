@@ -1,0 +1,75 @@
+﻿@page "/transactions"
+
+@using PersonalAccounting.Domain.Entities
+@using PersonalAccounting.Web.Services.Interfaces
+@using PersonalAccounting.Web.Pages.Common
+@inject ITransactionsService  transactionsService
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Transactions</h3>
+        <div class="mt-4">
+
+        </div>
+    </div>
+    @if (_transactions is null)
+    {
+        // TODO Implement Error handling
+        <Loading />
+    }
+    else
+    {
+        <div class="col-sm-8">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Updated At</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in _transactions)
+                    {
+                        <tr>
+                            <td>@transaction.UpdatedAt</td>
+                            <td>@transaction.Category.Name</td>
+                            <td>@transaction.Note</td>
+                            <td>@transaction.Amount KM</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Amount by Category</h5>
+                    <ul class="list-group list-group-flush mt-4">
+                        @foreach (var category in _groupByCategory)
+                        {
+                            <li class="list-group-item">
+                                <span class="text-left">@category.Key</span>
+                                <span class="text-right">@category.Sum(s => s.Amount) KM</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Transaction> _transactions;
+    private IEnumerable<IGrouping<string, Transaction>> _groupByCategory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // TODO Add BudgetId
+        _transactions = await transactionsService.GetByBudgetId(1);
+
+        _groupByCategory = _transactions.GroupBy(g => g.Category.Name);
+    }
+}

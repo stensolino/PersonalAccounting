@@ -45,7 +45,6 @@ namespace PersonalAccounting.Database
                     Name = "Cash",
                     MaxAmount = 50,
                     Description = "Currently cash in use",
-                    BudgetId = 1
                 },
                 new Category
                 {
@@ -53,7 +52,6 @@ namespace PersonalAccounting.Database
                     Name = "UniCredit Bank",
                     MaxAmount = 230,
                     Description = "My primary bank",
-                    BudgetId = 1
                 }
             );
 
@@ -63,28 +61,32 @@ namespace PersonalAccounting.Database
                     Id = 1,
                     CategoryId = 1,
                     Amount = 15,
-                    Note = "Drink"
+                    Note = "Drink",
+                    BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 2,
                     CategoryId = 1,
                     Amount = 47,
-                    Note = "Lunch"
+                    Note = "Lunch",
+                    BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 3,
                     CategoryId = 2,
                     Amount = 9000,
-                    Note = "Salary"
+                    Note = "Salary",
+                    BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 4,
                     CategoryId = 2,
                     Amount = 55,
-                    Note = "Bill"
+                    Note = "Bill",
+                    BudgetId = 1
                 }
             );
         }
