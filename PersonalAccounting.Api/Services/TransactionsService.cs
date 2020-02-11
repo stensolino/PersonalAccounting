@@ -4,6 +4,7 @@ using PersonalAccounting.Database;
 using PersonalAccounting.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Services
 {
@@ -22,6 +23,21 @@ namespace PersonalAccounting.Api.Services
             .Include(i => i.Category);
 
             return result;
+        }
+
+        public IEnumerable<Category> GetCategories(int budgetId)
+        {
+            var result = _appDbContext.Categories.Where(c => c.Transactions.Any(t => t.BudgetId == budgetId));
+
+            return result;
+        }
+
+        public async Task Insert(Transaction transaction)
+        {
+            await _appDbContext.Transactions.AddAsync(transaction);
+            await _appDbContext.SaveChangesAsync();
+
+            var ne = _appDbContext.Categories.Where(c => c.Transactions.Any(a => a.BudgetId == 1));
         }
     }
 }

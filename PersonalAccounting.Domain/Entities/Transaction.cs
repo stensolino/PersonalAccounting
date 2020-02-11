@@ -1,4 +1,6 @@
-﻿namespace PersonalAccounting.Domain.Entities
+﻿using System;
+
+namespace PersonalAccounting.Domain.Entities
 {
     public class Transaction : BaseEntity
     {
@@ -8,5 +10,6 @@
         public Budget Budget { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -38,6 +39,24 @@ namespace PersonalAccounting.Web.Services
             {
                 _logger.LogError("GetByBudgetId throw an error", ex.Message);
                 throw;
+            }
+        }
+
+        public async Task Insert(Transaction transaction)
+        {
+            try
+            {
+                var transactionJson = new StringContent(JsonSerializer.Serialize(transaction), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"/api/Transactions", transactionJson);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Error on saving data");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("GetByBudgetId throw an error", ex.Message);
+                throw new Exception("Some Error occure");
             }
         }
     }

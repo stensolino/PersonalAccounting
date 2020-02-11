@@ -39,8 +39,9 @@ namespace PersonalAccounting.Api.Controllers
 
         // POST: api/Transactions
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public async Task Post([FromBody] Transaction transaction)
+        {            
+            await _transactionService.Insert(transaction);
         }
 
         // PUT: api/Transactions/5
