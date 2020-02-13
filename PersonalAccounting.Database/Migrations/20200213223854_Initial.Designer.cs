@@ -10,8 +10,8 @@ using PersonalAccounting.Database;
 namespace PersonalAccounting.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200117221138_AddInitialSeed")]
-    partial class AddInitialSeed
+    [Migration("20200213223854_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,35 +48,6 @@ namespace PersonalAccounting.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Budgets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0,
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("PersonalAccounting.Domain.Entities.Category", b =>
@@ -112,35 +83,7 @@ namespace PersonalAccounting.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BudgetId");
-
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BudgetId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Description = "Currently cash in use",
-                            MaxAmount = 50f,
-                            Name = "Cash",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BudgetId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Description = "My primary bank",
-                            MaxAmount = 230f,
-                            Name = "UniCredit Bank",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        });
                 });
 
             modelBuilder.Entity("PersonalAccounting.Domain.Entities.Transaction", b =>
@@ -153,6 +96,9 @@ namespace PersonalAccounting.Database.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
+                    b.Property<int>("BudgetId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -161,6 +107,9 @@ namespace PersonalAccounting.Database.Migrations
 
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -173,55 +122,11 @@ namespace PersonalAccounting.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BudgetId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 15f,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Note = "Drink",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 47f,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Note = "Lunch",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 9000f,
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Note = "Salary",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 55f,
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0,
-                            Note = "Bill",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0
-                        });
                 });
 
             modelBuilder.Entity("PersonalAccounting.Domain.Entities.User", b =>
@@ -240,13 +145,6 @@ namespace PersonalAccounting.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "stensolino@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("PersonalAccounting.Domain.Entities.Budget", b =>
@@ -258,17 +156,14 @@ namespace PersonalAccounting.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PersonalAccounting.Domain.Entities.Category", b =>
+            modelBuilder.Entity("PersonalAccounting.Domain.Entities.Transaction", b =>
                 {
                     b.HasOne("PersonalAccounting.Domain.Entities.Budget", "Budget")
-                        .WithMany("Categories")
+                        .WithMany("Transactions")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("PersonalAccounting.Domain.Entities.Transaction", b =>
-                {
                     b.HasOne("PersonalAccounting.Domain.Entities.Category", "Category")
                         .WithMany("Transactions")
                         .HasForeignKey("CategoryId")

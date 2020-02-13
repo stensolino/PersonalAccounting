@@ -8,6 +8,26 @@ namespace PersonalAccounting.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    CreatedBy = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedBy = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    MaxAmount = table.Column<float>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    BudgetId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -45,32 +65,6 @@ namespace PersonalAccounting.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    CreatedBy = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedBy = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    MaxAmount = table.Column<float>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    BudgetId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Budgets_BudgetId",
-                        column: x => x.BudgetId,
-                        principalTable: "Budgets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
@@ -82,11 +76,19 @@ namespace PersonalAccounting.Database.Migrations
                     UpdatedBy = table.Column<int>(nullable: false),
                     Amount = table.Column<float>(nullable: false),
                     Note = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false)
+                    BudgetId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Transactions_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -101,8 +103,8 @@ namespace PersonalAccounting.Database.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_BudgetId",
-                table: "Categories",
+                name: "IX_Transactions_BudgetId",
+                table: "Transactions",
                 column: "BudgetId");
 
             migrationBuilder.CreateIndex(
@@ -117,10 +119,10 @@ namespace PersonalAccounting.Database.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Budgets");
 
             migrationBuilder.DropTable(
-                name: "Budgets");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Users");

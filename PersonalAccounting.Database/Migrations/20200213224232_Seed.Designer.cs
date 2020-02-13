@@ -10,8 +10,8 @@ using PersonalAccounting.Database;
 namespace PersonalAccounting.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200209205637_TransactionAddDateColumn")]
-    partial class TransactionAddDateColumn
+    [Migration("20200213224232_Seed")]
+    partial class Seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,9 @@ namespace PersonalAccounting.Database.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BudgetId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -115,6 +118,7 @@ namespace PersonalAccounting.Database.Migrations
                         new
                         {
                             Id = 1,
+                            BudgetId = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 0,
                             Description = "Currently cash in use",
@@ -126,10 +130,23 @@ namespace PersonalAccounting.Database.Migrations
                         new
                         {
                             Id = 2,
+                            BudgetId = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 0,
                             Description = "My primary bank",
                             MaxAmount = 230f,
+                            Name = "UniCredit Bank",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UpdatedBy = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BudgetId = 0,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = 0,
+                            Description = "My primary bank of another user",
+                            MaxAmount = 29f,
                             Name = "UniCredit Bank",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UpdatedBy = 0

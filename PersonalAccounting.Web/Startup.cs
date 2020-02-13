@@ -47,6 +47,7 @@ namespace PersonalAccounting.Web
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<ITransactionsService, TransactionsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

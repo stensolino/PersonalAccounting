@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Services.Interfaces
 {
-    public interface ITransactionsService
+    public interface ICategoriesService
     {
-        IEnumerable<Transaction> GetByBudgetId(int budgetId);
-        Task Insert(Transaction transaction);
+        IEnumerable<Category> GetCategoriesByBudgetId(int budgetId);
+        Task Insert(Category category);
     }
 }

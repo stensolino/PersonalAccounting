@@ -40,6 +40,7 @@ namespace PersonalAccounting.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ITransactionsService, TransactionsService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
 
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
