@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Web.Services.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,17 +22,20 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
         private readonly UserManager<CognitoUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly CognitoUserPool _pool;
+        private readonly IUsersServices _usersService;
 
         public RegisterModel(
             UserManager<CognitoUser> userManager,
             SignInManager<CognitoUser> signInManager,
             ILogger<RegisterModel> logger,
-            CognitoUserPool pool)
+            CognitoUserPool pool,
+            IUsersServices usersService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _pool = pool;
+            _usersService = usersService;
         }
 
         [BindProperty]
@@ -78,6 +83,17 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // Register user in local db and
+                    // add default budget for the user
+                    var userBudgets = new List<Budget>();
+                    userBudgets.Add(new Budget { });
+                    await _usersService.CreateUserAsync(new User
+                    {
+                        CognitoId = user.UserID,
+                        Email = user.Username,
+                        Budgets = userBudgets
+                    });
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 

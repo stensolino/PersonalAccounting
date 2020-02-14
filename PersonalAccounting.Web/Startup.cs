@@ -45,6 +45,7 @@ namespace PersonalAccounting.Web
             }).AddHttpMessageHandler<HttpClientMessageHandlers>();
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
+            services.AddTransient<IUsersServices, UsersServices>();
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<ITransactionsService, TransactionsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
