@@ -23,7 +23,7 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync($"/api/Categories/{budgetId}");
+                var response = await _httpClient.GetAsync($"/api/Budgets/{budgetId}/Categories");
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();

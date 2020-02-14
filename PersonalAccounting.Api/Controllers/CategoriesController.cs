@@ -28,8 +28,8 @@ namespace PersonalAccounting.Api.Controllers
             return new[] { "", "" };
         }
 
-        // GET: api/Categories/5
-        [HttpGet("{budgetId}")]
+        // GET: api/Budgets/1/Categories
+        [HttpGet("/api/Budgets/{budgetId}/Categories")]
         public IEnumerable<Category> GetByBudgetId(int budgetId)
         {
             var categories = _categoriesService.GetCategoriesByBudgetId(budgetId);
