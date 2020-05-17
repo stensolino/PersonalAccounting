@@ -36,12 +36,12 @@ namespace PersonalAccounting.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddCognitoIdentity();
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor();            
 
             services.AddTransient<HttpClientMessageHandlers>();
             services.AddHttpClient(Constants.PersonalAccountingApi, c =>
             {
-                c.BaseAddress = new Uri("https://localhost:5011/api/");
+                c.BaseAddress = new Uri(Configuration.GetSection("HttpClient:PersonalAccountingApi:Uri").Value);
             }).AddHttpMessageHandler<HttpClientMessageHandlers>();
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
@@ -49,6 +49,8 @@ namespace PersonalAccounting.Web
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<ITransactionsService, TransactionsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +81,7 @@ namespace PersonalAccounting.Web
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

@@ -18,15 +18,18 @@ namespace PersonalAccounting.Api.Services
 
         public IEnumerable<Category> GetCategoriesByBudgetId(int budgetId)
         {
-            var result = _appDbContext.Categories
+            var categories = _appDbContext.Categories
                 .Where(c => c.BudgetId == budgetId)
                 .Select(s => new Category
                 {
                     Id = s.Id,
-                    Name = s.Name
+                    Name = s.Name,
+                    MaxAmount = s.MaxAmount,
+                    Description = s.Description,
+                    BudgetId = s.BudgetId
                 });
 
-            return result;
+            return categories;
         }
 
         public async Task Insert(Category category)

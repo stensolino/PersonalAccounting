@@ -45,7 +45,7 @@ namespace PersonalAccounting.Database
                     Name = "Cash",
                     MaxAmount = 50,
                     Description = "Currently cash in use",
-                    BudgetId = 1
+                    //MainBudgetId = 1
                 },
                 new Category
                 {
@@ -53,7 +53,7 @@ namespace PersonalAccounting.Database
                     Name = "UniCredit Bank",
                     MaxAmount = 230,
                     Description = "My primary bank",
-                    BudgetId = 1
+                    //MainBudgetId = 1
                 },
                 new Category
                 {

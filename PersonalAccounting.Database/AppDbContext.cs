@@ -21,7 +21,12 @@ namespace PersonalAccounting.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Seed();
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Category)
+                .WithMany(t => t.Transactions)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            //modelBuilder.Seed();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

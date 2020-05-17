@@ -24,7 +24,7 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync($"/api/Budgets/{id}/Transactions");
+                var response = await _httpClient.GetAsync($"Budgets/{id}/Transactions");
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();

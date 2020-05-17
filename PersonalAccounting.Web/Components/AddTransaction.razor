@@ -48,7 +48,10 @@
     public List<Category> Categories { get; set; }
     protected string CategoryId = string.Empty;
 
-    public Transaction Transaction { get; set; } = new Transaction { Category = new Category() };
+    public Transaction Transaction { get; set; } = new Transaction
+    {
+        Category = new Category()
+    };
 
     protected override void OnInitialized()
     {

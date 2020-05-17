@@ -6,10 +6,10 @@ namespace PersonalAccounting.Domain.Entities
     {
         public float Amount { get; set; }
         public string Note { get; set; }
-        public int BudgetId { get; set; }
-        public Budget Budget { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
         public DateTime Date { get; set; }
+        public long BudgetId { get; set; }
+        public Budget Budget { get; set; }
+        public long CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

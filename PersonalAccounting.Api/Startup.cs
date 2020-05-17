@@ -50,6 +50,8 @@ namespace PersonalAccounting.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Personal Accounting API", Version = "v1" });
             });
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +78,7 @@ namespace PersonalAccounting.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

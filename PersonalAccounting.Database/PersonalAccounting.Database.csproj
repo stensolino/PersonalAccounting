@@ -5,19 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200117215823_Initial.cs" />
-    <Compile Remove="Migrations\20200117215823_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20200213180917_Initial.cs" />
-    <Compile Remove="Migrations\20200213180917_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20200213211630_AddSeed.cs" />
-    <Compile Remove="Migrations\20200213211630_AddSeed.Designer.cs" />
-    <Compile Remove="Migrations\20200213211726_AddSeedCategories.cs" />
-    <Compile Remove="Migrations\20200213211726_AddSeedCategories.Designer.cs" />
-    <Compile Remove="Migrations\20200213211816_AddSeedTransactions.cs" />
-    <Compile Remove="Migrations\20200213211816_AddSeedTransactions.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
   </ItemGroup>
