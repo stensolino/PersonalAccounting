@@ -1,7 +1,7 @@
 ﻿@page "/edit-budget/{BudgetId}"
 @page "/add-budget"
 
-@using PersonalAccounting.Domain.Entities
+@using PersonalAccounting.Dto
 @using PersonalAccounting.Web.Services.Interfaces
 @inject IBudgetService  budgetService
 
@@ -10,7 +10,7 @@
         <h3>Edit Budget</h3>
 
         <EditForm Model="@Budget" OnValidSubmit="@HandleValidSubmit">
-            <InputDate id="createdat" @bind-Value="@Budget.CreatedAt" class="form-control col-sm-8"></InputDate>
+            @*<InputDate id="createdat" @bind-Value="@Budget.CreatedAt" class="form-control col-sm-8"></InputDate>*@
             @*<InputText id="id" @bind-Value="@Budget.Id.ToString()" class="form-control col-sm-8" placeholder="Enter id"></InputText>*@
             
             <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
@@ -53,7 +53,7 @@
 @code {
     [Parameter]
     public string BudgetId { get; set; }
-    public Budget Budget { get; set; } = new Budget();
+    public BudgetDto Budget { get; set; } = new BudgetDto();
 
     protected override async Task OnInitializedAsync()
     {

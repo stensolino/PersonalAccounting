@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Dto;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Controllers
 {
@@ -30,7 +27,7 @@ namespace PersonalAccounting.Api.Controllers
 
         // GET: api/Budgets/1/Transactions
         [HttpGet("/api/Budgets/{id}/Transactions")]
-        public ActionResult<IEnumerable<Transaction>> GetByBudgetId(int id)
+        public ActionResult<IEnumerable<TransactionDto>> GetByBudgetId(int id)
         {
             var transactions = _transactionService.GetByBudgetId(id);
 

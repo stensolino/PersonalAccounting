@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using PersonalAccounting.Domain;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;

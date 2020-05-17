@@ -2,6 +2,7 @@
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Database;
 using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,11 @@ namespace PersonalAccounting.Api.Services
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Transaction> GetByBudgetId(int budgetId)
+        public IEnumerable<TransactionDto> GetByBudgetId(int budgetId)
         {
             var transactions = _dbContext.Transactions
                 .Where(t => t.BudgetId == budgetId)
-                .Select(s => new Transaction
+                .Select(s => new TransactionDto
                 {
                     Id = s.Id,
                     Amount = s.Amount,

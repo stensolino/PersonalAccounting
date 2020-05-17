@@ -45,12 +45,12 @@
 
 @code {
     [Parameter]
-    public List<Category> Categories { get; set; }
+    public List<CategoryDto> Categories { get; set; }
     protected string CategoryId = string.Empty;
 
-    public Transaction Transaction { get; set; } = new Transaction
+    public TransactionDto Transaction { get; set; } = new TransactionDto
     {
-        Category = new Category()
+        Category = new CategoryDto()
     };
 
     protected override void OnInitialized()

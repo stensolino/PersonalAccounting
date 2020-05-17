@@ -1,6 +1,6 @@
-﻿namespace PersonalAccounting.Domain
+﻿namespace PersonalAccounting.Web
 {
-    public static class Constants
+    public class Constants
     {
         public static string JwtBearerDefaultsAuthenticationScheme = "Bearer";
         public static string IdToken = "id_token";

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PersonalAccounting.Domain;
 using PersonalAccounting.Web.Areas.Identity;
 using PersonalAccounting.Web.Handlers;
 using PersonalAccounting.Web.Services;

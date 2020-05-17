@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Dto;
 using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Net.Http;
@@ -19,7 +19,7 @@ namespace PersonalAccounting.Web.Services
             _logger = logger;
         }
 
-        public async Task CreateUserAsync(User user)
+        public async Task CreateUserAsync(UserDto user)
         {
             try
             {

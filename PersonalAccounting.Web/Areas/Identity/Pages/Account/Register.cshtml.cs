@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Dto;
 using PersonalAccounting.Web.Services.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -86,9 +86,9 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 
                     // Register user in local db and
                     // add default budget for the user
-                    var userBudgets = new List<Budget>();
-                    userBudgets.Add(new Budget { });
-                    await _usersService.CreateUserAsync(new User
+                    var userBudgets = new List<BudgetDto>();
+                    userBudgets.Add(new BudgetDto { });
+                    await _usersService.CreateUserAsync(new UserDto
                     {
                         CognitoId = user.UserID,
                         Email = user.Username,

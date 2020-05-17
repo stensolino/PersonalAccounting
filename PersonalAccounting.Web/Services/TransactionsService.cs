@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Dto;
 using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace PersonalAccounting.Web.Services
             _logger = logger;
         }
 
-        public async Task<List<Transaction>> GetByBudgetId(int id)
+        public async Task<List<TransactionDto>> GetByBudgetId(int id)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace PersonalAccounting.Web.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-                    var budget = JsonSerializer.Deserialize<List<Transaction>>(responseString, _jsonSerializerOptions);
+                    var budget = JsonSerializer.Deserialize<List<TransactionDto>>(responseString, _jsonSerializerOptions);
                     return budget;
                 }
 
@@ -42,7 +42,7 @@ namespace PersonalAccounting.Web.Services
             }
         }
 
-        public async Task Insert(Transaction transaction)
+        public async Task Insert(TransactionDto transaction)
         {
             try
             {

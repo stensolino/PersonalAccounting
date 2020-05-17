@@ -1,10 +1,10 @@
-﻿using PersonalAccounting.Domain.Entities;
+﻿using PersonalAccounting.Dto;
 using System.Threading.Tasks;
 
 namespace PersonalAccounting.Web.Services.Interfaces
 {
     public interface IUsersServices
     {
-        Task CreateUserAsync(User user);
+        Task CreateUserAsync(UserDto user);
     }
 }

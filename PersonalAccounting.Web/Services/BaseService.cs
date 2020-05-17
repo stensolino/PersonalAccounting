@@ -1,6 +1,4 @@
-﻿using PersonalAccounting.Domain;
-using PersonalAccounting.Web.Services.Interfaces;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text.Json;
 
 namespace PersonalAccounting.Web.Services

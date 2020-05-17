@@ -37,7 +37,6 @@
                     @foreach (var transaction in _transactions)
                     {
                         <tr>
-                            <td>@transaction.UpdatedAt</td>
                             <td>@transaction.Category.Name</td>
                             <td>@transaction.Note</td>
                             <td>@transaction.Amount KM</td>
@@ -68,9 +67,9 @@
 
 @code {
     private bool _loading = false;
-    private List<Category> _categories;
-    private List<Transaction> _transactions;
-    private IEnumerable<IGrouping<string, Transaction>> _groupByCategory;
+    private List<CategoryDto> _categories;
+    private List<TransactionDto> _transactions;
+    private IEnumerable<IGrouping<string, TransactionDto>> _groupByCategory;
 
     protected override async Task OnInitializedAsync()
     {
