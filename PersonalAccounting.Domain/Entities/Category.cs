@@ -6,7 +6,7 @@ namespace PersonalAccounting.Domain.Entities
     public class Category : BaseEntity
     {
         public string Name { get; set; }
-        public float MaxAmount { get; set; }
+        public float? MaxAmount { get; set; }
         public string Description { get; set; }
         public CategoryType Type { get; set; }
         public long BudgetId { get; set; }
