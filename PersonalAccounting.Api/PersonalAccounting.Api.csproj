@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalAccounting.Database\PersonalAccounting.Database.csproj" />
-    <ProjectReference Include="..\PersonalAccounting.Dto\PersonalAccounting.Dto.csproj" />
   </ItemGroup>
 
 

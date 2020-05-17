@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalAccounting.Api.Services.Interfaces;
+using PersonalAccounting.Domain.Dto;
 using PersonalAccounting.Domain.Entities;
-using PersonalAccounting.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,5 +1,5 @@
-﻿using PersonalAccounting.Domain.Entities;
-using PersonalAccounting.Dto;
+﻿using PersonalAccounting.Domain.Dto;
+using PersonalAccounting.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

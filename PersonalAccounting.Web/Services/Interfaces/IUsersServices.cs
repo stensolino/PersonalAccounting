@@ -1,4 +1,4 @@
-﻿using PersonalAccounting.Dto;
+﻿using PersonalAccounting.Domain.Dto;
 using System.Threading.Tasks;
 
 namespace PersonalAccounting.Web.Services.Interfaces

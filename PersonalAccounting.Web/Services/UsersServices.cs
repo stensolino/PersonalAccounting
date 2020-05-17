@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using PersonalAccounting.Dto;
+using PersonalAccounting.Domain.Dto;
 using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Net.Http;

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Database;
+using PersonalAccounting.Domain.Dto;
 using PersonalAccounting.Domain.Entities;
-using PersonalAccounting.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

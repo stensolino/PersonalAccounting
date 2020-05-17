@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Web", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalAccounting.Api", "PersonalAccounting.Api\PersonalAccounting.Api.csproj", "{B3094DDB-3C9D-446A-9A5A-5A78641E3834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalAccounting.Dto", "PersonalAccounting.Dto\PersonalAccounting.Dto.csproj", "{A7C17347-26BA-4C36-B2B8-A1C5EC5A6801}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{B3094DDB-3C9D-446A-9A5A-5A78641E3834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3094DDB-3C9D-446A-9A5A-5A78641E3834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3094DDB-3C9D-446A-9A5A-5A78641E3834}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7C17347-26BA-4C36-B2B8-A1C5EC5A6801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7C17347-26BA-4C36-B2B8-A1C5EC5A6801}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7C17347-26BA-4C36-B2B8-A1C5EC5A6801}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7C17347-26BA-4C36-B2B8-A1C5EC5A6801}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
