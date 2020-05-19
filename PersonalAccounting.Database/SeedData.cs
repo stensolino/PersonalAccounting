@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Domain.Enum;
+using System;
 
 namespace PersonalAccounting.Database
 {
@@ -30,11 +32,6 @@ namespace PersonalAccounting.Database
                 {
                     Id = 2,
                     UserId = 1
-                },
-                new Budget
-                {
-                    Id = 3,
-                    UserId = 1
                 }
             );
 
@@ -42,25 +39,72 @@ namespace PersonalAccounting.Database
                 new Category
                 {
                     Id = 1,
-                    Name = "Cash",
+                    Name = "Drink",
                     MaxAmount = 50,
-                    Description = "Currently cash in use",
-                    //MainBudgetId = 1
+                    Description = "Daily drink",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 1
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = "UniCredit Bank",
+                    Name = "Food",
                     MaxAmount = 230,
-                    Description = "My primary bank",
-                    //MainBudgetId = 1
+                    Description = "Breakfast, Lunch, Diner...",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 1
                 },
                 new Category
                 {
                     Id = 3,
+                    Name = "Parking",
+                    MaxAmount = 230,
+                    Description = "Garage, public parking...",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 1
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Fuel",
+                    MaxAmount = 230,
+                    Description = "Fuel for car",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 1
+                },
+                new Category
+                {
+                    Id = 5,
+                    Name = "Cache",
+                    Description = "Current cache status",
+                    Type = CategoryType.Income,
+                    BudgetId = 1
+                },
+                new Category
+                {
+                    Id = 6,
                     Name = "UniCredit Bank",
+                    Description = "Bank account",
+                    Type = CategoryType.Income,
+                    BudgetId = 1
+                },
+                new Category
+                {
+                    Id = 7,
+                    Name = "Maintenance",
                     MaxAmount = 29,
-                    Description = "My primary bank of another user"
+                    Description = "Regular real estate maintenance",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 2
+                },
+                new Category
+                {
+                    Id = 8,
+                    Name = "Fuel",
+                    MaxAmount = 29,
+                    Description = "Fuel for all vehicles",
+                    Type = CategoryType.Outcome,
+                    BudgetId = 2
                 }
             );
 
@@ -68,33 +112,37 @@ namespace PersonalAccounting.Database
                 new Transaction
                 {
                     Id = 1,
-                    CategoryId = 1,
                     Amount = 15,
-                    Note = "Drink",
+                    Note = "Some note",
+                    Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
+                    CategoryId = 1,
                     BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 2,
-                    CategoryId = 1,
                     Amount = 47,
-                    Note = "Lunch",
+                    Note = "Some note",
+                    Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
+                    CategoryId = 2,
                     BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 3,
-                    CategoryId = 2,
-                    Amount = 9000,
-                    Note = "Salary",
+                    Amount = 33,
+                    Note = "Some note",
+                    Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
+                    CategoryId = 3,
                     BudgetId = 1
                 },
                 new Transaction
                 {
                     Id = 4,
-                    CategoryId = 2,
-                    Amount = 55,
-                    Note = "Bill",
+                    Amount = 27,
+                    Note = "Some note",
+                    Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
+                    CategoryId = 4,
                     BudgetId = 1
                 }
             );

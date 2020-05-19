@@ -26,7 +26,7 @@ namespace PersonalAccounting.Database
                 .WithMany(t => t.Transactions)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

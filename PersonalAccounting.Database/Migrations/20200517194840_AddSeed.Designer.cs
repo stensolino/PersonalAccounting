@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalAccounting.Database;
 
 namespace PersonalAccounting.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200517194840_AddSeed")]
+    partial class AddSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,60 +259,6 @@ namespace PersonalAccounting.Database.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Amount = 15f,
-                            BudgetId = 1L,
-                            CategoryId = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0L,
-                            Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
-                            Note = "Some note",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Amount = 47f,
-                            BudgetId = 1L,
-                            CategoryId = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0L,
-                            Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
-                            Note = "Some note",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Amount = 33f,
-                            BudgetId = 1L,
-                            CategoryId = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0L,
-                            Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
-                            Note = "Some note",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Amount = 27f,
-                            BudgetId = 1L,
-                            CategoryId = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 0L,
-                            Date = new DateTime(2020, 5, 15, 14, 30, 0, 0, DateTimeKind.Utc),
-                            Note = "Some note",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedBy = 0L
-                        });
                 });
 
             modelBuilder.Entity("PersonalAccounting.Domain.Entities.User", b =>
