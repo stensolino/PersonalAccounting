@@ -10,6 +10,6 @@ namespace PersonalAccounting.Domain.Dto
         public DateTime Date { get; set; }
         public long BudgetId { get; set; }
         public long CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
+        public string CategoryName { get; set; }
     }
 }

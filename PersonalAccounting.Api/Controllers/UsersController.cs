@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalAccounting.Api.Services.Interfaces;
-using PersonalAccounting.Domain.Entities;
+using PersonalAccounting.Domain.Dto;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Controllers
 {
@@ -38,7 +34,7 @@ namespace PersonalAccounting.Api.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task Post([FromBody] User user)
+        public async Task Post([FromBody] UserDto user)
         {
             await _usersService.CreateUserAsync(user);
         }

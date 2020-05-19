@@ -27,7 +27,7 @@
             <table class="table table-sm table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Updated At</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Category Name</th>
                         <th scope="col">Note</th>
                         <th scope="col">Amount</th>
@@ -37,7 +37,8 @@
                     @foreach (var transaction in _transactions)
                     {
                         <tr>
-                            <td>@transaction.Category.Name</td>
+                            <td>@transaction.Date</td>
+                            <td>@transaction.CategoryName</td>
                             <td>@transaction.Note</td>
                             <td>@transaction.Amount KM</td>
                         </tr>
@@ -69,7 +70,7 @@
     private bool _loading = false;
     private List<CategoryDto> _categories;
     private List<TransactionDto> _transactions;
-    private IEnumerable<IGrouping<string, TransactionDto>> _groupByCategory;
+    private IEnumerable<IGrouping<long, TransactionDto>> _groupByCategory;
 
     protected override async Task OnInitializedAsync()
     {
@@ -82,7 +83,7 @@
         _categories = await categoriesPromise;
         _transactions = await transactionsPromise;
 
-        _groupByCategory = _transactions?.GroupBy(g => g.Category.Name);
+        _groupByCategory = _transactions?.GroupBy(g => g.CategoryId);
 
         _loading = false;
     }

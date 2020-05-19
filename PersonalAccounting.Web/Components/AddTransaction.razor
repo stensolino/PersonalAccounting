@@ -50,7 +50,7 @@
 
     public TransactionDto Transaction { get; set; } = new TransactionDto
     {
-        Category = new CategoryDto()
+        //Category = new CategoryDto()
     };
 
     protected override void OnInitialized()
@@ -59,7 +59,7 @@
 
         if (defaultCategory is { })
         {
-            Transaction.Category = defaultCategory;
+            Transaction.CategoryName = defaultCategory.Name;
             Transaction.CategoryId = defaultCategory.Id;
             CategoryId = defaultCategory.Id.ToString();
         }
@@ -78,7 +78,7 @@
                 if (choosenCategory is { })
                 {
                     Transaction.CategoryId = choosenCategory.Id;
-                    Transaction.Category = choosenCategory;
+                    Transaction.CategoryName = choosenCategory.Name;
                 }
             }
 

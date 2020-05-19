@@ -28,7 +28,9 @@ namespace PersonalAccounting.Api.Services
                     Id = s.Id,
                     Amount = s.Amount,
                     Note = s.Note,
-                    Date = s.Date
+                    Date = s.Date,
+                    CategoryId = s.CategoryId,
+                    CategoryName = s.Category.Name
                 });
 
             return transactions;
