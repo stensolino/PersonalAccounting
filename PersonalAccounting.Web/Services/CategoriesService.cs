@@ -19,7 +19,7 @@ namespace PersonalAccounting.Web.Services
             _logger = logger;
         }
 
-        public async Task<List<CategoryDto>> GetCategories(int budgetId)
+        public async Task<List<CategoryDto>> GetCategoriesByBudgetId(int budgetId)
         {
             try
             {

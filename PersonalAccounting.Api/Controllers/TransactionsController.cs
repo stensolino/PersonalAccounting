@@ -3,6 +3,7 @@ using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Dto;
 using PersonalAccounting.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Controllers
@@ -37,7 +38,7 @@ namespace PersonalAccounting.Api.Controllers
         // POST: api/Transactions
         [HttpPost]
         public async Task Post([FromBody] Transaction transaction)
-        {            
+        {
             await _transactionService.Insert(transaction);
         }
 

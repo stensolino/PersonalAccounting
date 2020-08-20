@@ -1,6 +1,6 @@
 ﻿@using System.Linq;
 
-@page "/transactions"
+@page "/transactions/{id}"
 
 @inject ITransactionsService  transactionsService
 @inject ICategoriesService  categoriesService
@@ -47,17 +47,19 @@
             </table>
         </div>
         <div class="col-sm-4">
-            <AddTransaction Categories="@_categories" />
+            <AddTransaction Categories="@_categories" BudgetId="@_budgetId" ReloadParent="LoadTransactions" />
+            <br />
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total Amount by Category</h5>
                     <ul class="list-group list-group-flush mt-4">
                         @foreach (var category in _groupByCategory)
                         {
-                            <li class="list-group-item">
-                                <span class="text-left">@category.Key</span>
-                                <span class="text-right">@category.Sum(s => s.Amount) KM</span>
-                            </li>
+                        <li class="list-group-item">
+                            <span class="text-left">@category.FirstOrDefault()?.CategoryName : </span>
+                            <span class="text-left">@category.Key</span>
+                            <span class="text-right">@category.Sum(s => s.Amount) KM</span>
+                        </li>
                         }
                     </ul>
                 </div>
@@ -67,6 +69,8 @@
 </div>
 
 @code {
+    [Parameter] public string Id { get; set; }
+    private int _budgetId;
     private bool _loading = false;
     private List<CategoryDto> _categories;
     private List<TransactionDto> _transactions;
@@ -76,15 +80,17 @@
     {
         _loading = true;
 
-        // TODO Add BudgetId
-        var categoriesPromise = categoriesService.GetCategories(1);
-        var transactionsPromise = transactionsService.GetByBudgetId(1);
+        int.TryParse(Id, out _budgetId);
 
-        _categories = await categoriesPromise;
-        _transactions = await transactionsPromise;
-
-        _groupByCategory = _transactions?.GroupBy(g => g.CategoryId);
+        _categories = await categoriesService.GetCategoriesByBudgetId(_budgetId);
+        await LoadTransactions();
 
         _loading = false;
+    }
+
+    async Task LoadTransactions()
+    {
+        _transactions = await transactionsService.GetTransactionsByBudgetId(_budgetId);
+        _groupByCategory = _transactions?.GroupBy(g => g.CategoryId);
     }
 }

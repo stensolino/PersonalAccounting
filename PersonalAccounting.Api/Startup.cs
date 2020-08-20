@@ -40,6 +40,7 @@ namespace PersonalAccounting.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUsersServices, UsersServices>();
+            services.AddScoped<IBudgetsService, BudgetsService>();
             services.AddScoped<ITransactionsService, TransactionsService>();
             services.AddScoped<ICategoriesService, CategoriesService>();
 

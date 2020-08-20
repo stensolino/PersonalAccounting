@@ -20,7 +20,7 @@ namespace PersonalAccounting.Web.Services
             _logger = logger;
         }
 
-        public async Task<List<TransactionDto>> GetByBudgetId(int id)
+        public async Task<List<TransactionDto>> GetTransactionsByBudgetId(int id)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace PersonalAccounting.Web.Services
             }
         }
 
-        public async Task Insert(TransactionDto transaction)
+        public async Task InsertTransaction(TransactionDto transaction)
         {
             try
             {

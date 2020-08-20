@@ -3,7 +3,7 @@
 
 @using PersonalAccounting.Domain.Dto
 @using PersonalAccounting.Web.Services.Interfaces
-@inject IBudgetService  budgetService
+@inject IBudgetsService  budgetsService
 
 <div class="row">
     <div class="col-sm-12">
@@ -62,7 +62,7 @@
 
         if (nes)
         {
-            Budget = await budgetService.GetBudget(paramBudgetId);
+            Budget = await budgetsService.GetBudget(paramBudgetId);
         }
     }
 

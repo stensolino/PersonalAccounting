@@ -6,7 +6,7 @@ namespace PersonalAccounting.Web.Services.Interfaces
 {
     public interface ITransactionsService
     {
-        Task<List<TransactionDto>> GetByBudgetId(int id);
-        Task Insert(TransactionDto transaction);
+        Task<List<TransactionDto>> GetTransactionsByBudgetId(int id);
+        Task InsertTransaction(TransactionDto transaction);
     }
 }

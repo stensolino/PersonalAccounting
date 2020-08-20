@@ -84,17 +84,6 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Register user in local db and
-                    // add default budget for the user
-                    var userBudgets = new List<BudgetDto>();
-                    userBudgets.Add(new BudgetDto { });
-                    await _usersService.CreateUserAsync(new UserDto
-                    {
-                        CognitoId = user.UserID,
-                        Email = user.Username,
-                        Budgets = userBudgets
-                    });
-
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToPage("./ConfirmAccount");

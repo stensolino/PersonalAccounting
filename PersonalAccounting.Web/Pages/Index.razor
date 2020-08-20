@@ -1,5 +1,53 @@
-﻿@page "/"
+﻿@using System.Collections.Generic;
+@using System.Threading.Tasks;
+@using PersonalAccounting.Domain.Dto;
+@using PersonalAccounting.Web.Services.Interfaces;
 
-<h1>Hello, world!</h1>
+@page "/"
 
-Welcome to your new app.
+@inject IBudgetsService  budgetsService
+
+<h2>Welcome</h2>
+<br />
+<AuthorizeView>
+    <Authorized>
+        <h4>Choose you budget:</h4>
+        <br />
+
+        @if (_budgets == null)
+        {
+            <h3>You don't have any Budget</h3>
+        }
+        else
+        {
+            @foreach (var budget in _budgets)
+            {
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@budget.Name</h5>
+                        @*<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>*@
+                        <p class="card-text">To see transactions go to the details</p>
+                        <a href="transactions/@budget.Id" class="card-link">Details</a>
+                    </div>
+                </div>
+            }
+        }
+    </Authorized>
+    <NotAuthorized>
+        <h4>Please log in to see your budget</h4>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private bool _loading = false;
+    private List<BudgetDto> _budgets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _loading = true;
+
+        _budgets = await budgetsService.GetBudgetsByUserId();
+
+        _loading = false;
+    }
+}

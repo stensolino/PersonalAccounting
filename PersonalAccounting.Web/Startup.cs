@@ -34,8 +34,8 @@ namespace PersonalAccounting.Web
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddCognitoIdentity();
-            services.AddRazorPages();
-            services.AddServerSideBlazor();            
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddServerSideBlazor();
 
             services.AddTransient<HttpClientMessageHandlers>();
             services.AddHttpClient(Constants.PersonalAccountingApi, c =>
@@ -45,7 +45,7 @@ namespace PersonalAccounting.Web
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<CognitoUser>>();
             services.AddTransient<IUsersServices, UsersServices>();
-            services.AddTransient<IBudgetService, BudgetService>();
+            services.AddTransient<IBudgetsService, BudgetsService>();
             services.AddTransient<ITransactionsService, TransactionsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
 

@@ -6,6 +6,6 @@ namespace PersonalAccounting.Web.Services.Interfaces
 {
     public interface ICategoriesService
     {
-        Task<List<CategoryDto>> GetCategories(int budgetId);
+        Task<List<CategoryDto>> GetCategoriesByBudgetId(int budgetId);
     }
 }

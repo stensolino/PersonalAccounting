@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PersonalAccounting.Domain.Dto;
+using PersonalAccounting.Web.Services.Interfaces;
 
 namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 {
@@ -16,10 +19,12 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
     public class ConfirmAccountModel : PageModel
     {
         private readonly CognitoUserManager<CognitoUser> _userManager;
+        private readonly IUsersServices _usersService;
 
-        public ConfirmAccountModel(UserManager<CognitoUser> userManager)
+        public ConfirmAccountModel(UserManager<CognitoUser> userManager, IUsersServices usersServices)
         {
             _userManager = userManager as CognitoUserManager<CognitoUser>;
+            _usersService = usersServices;
         }
 
         [BindProperty]
@@ -59,6 +64,17 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    // Register user in local db and add default budget for the user
+                    var userBudgets = new List<BudgetDto>();
+                    userBudgets.Add(new BudgetDto { });
+                    var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+                    await _usersService.CreateUserAsync(new UserDto
+                    {
+                        CognitoId = user.UserID,
+                        Email = email,
+                        Budgets = userBudgets
+                    });
+
                     return returnUrl != null ? LocalRedirect(returnUrl) : Page() as IActionResult;
                 }
             }

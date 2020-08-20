@@ -38,22 +38,8 @@ namespace PersonalAccounting.Api.Services
 
         public async Task Insert(Transaction transaction)
         {
-            try
-            {
-                //TODO
-                transaction.BudgetId = 1;
-
-                var categoty = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == transaction.CategoryId);
-                //transaction.Category = categoty;
-
-                await _dbContext.Transactions.AddAsync(transaction);
-                await _dbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            await _dbContext.Transactions.AddAsync(transaction);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
