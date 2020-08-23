@@ -23,6 +23,8 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
+                _logger.LogInformation("Enter to UsersServices CreateUserAsync");
+
                 var userJson = new StringContent(JsonSerializer.Serialize(user), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("/api/Users", userJson);
                 if (response.IsSuccessStatusCode)

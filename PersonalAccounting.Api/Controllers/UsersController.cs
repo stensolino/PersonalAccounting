@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Dto;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace PersonalAccounting.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersServices _usersService;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUsersServices usersService)
+        public UsersController(ILogger<UsersController> logger, IUsersServices usersService)
         {
+            _logger = logger;
             _usersService = usersService;
         }
 
@@ -36,6 +39,8 @@ namespace PersonalAccounting.Api.Controllers
         [HttpPost]
         public async Task Post([FromBody] UserDto user)
         {
+            _logger.LogInformation("Enter to UsersController Post");
+
             await _usersService.CreateUserAsync(user);
         }
 

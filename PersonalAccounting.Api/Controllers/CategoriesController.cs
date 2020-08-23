@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Controllers
 {
@@ -15,9 +13,11 @@ namespace PersonalAccounting.Api.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService _categoriesService;
+        private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(ICategoriesService categoriesService)
+        public CategoriesController(ILogger<CategoriesController> logger, ICategoriesService categoriesService)
         {
+            _logger = logger;
             _categoriesService = categoriesService;
         }
 
@@ -32,6 +32,8 @@ namespace PersonalAccounting.Api.Controllers
         [HttpGet("/api/Budgets/{budgetId}/Categories")]
         public IEnumerable<Category> GetByBudgetId(int budgetId)
         {
+            _logger.LogInformation("Enter to CategoriesController GetByBudgetId");
+            
             var categories = _categoriesService.GetCategoriesByBudgetId(budgetId);
 
             return categories;
@@ -41,6 +43,8 @@ namespace PersonalAccounting.Api.Controllers
         [HttpPost]
         public async Task Post([FromBody] Category category)
         {
+            _logger.LogInformation("Enter to CategoriesController Post");
+            
             await _categoriesService.Insert(category);
         }
 

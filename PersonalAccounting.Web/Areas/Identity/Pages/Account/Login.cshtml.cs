@@ -50,6 +50,8 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            _logger.LogInformation("Enter to Login.schtml.cs OnGetAsync");
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -67,7 +69,11 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            _logger.LogInformation("Enter to Login.schtml.cs OnPostAsync");
+
             returnUrl = returnUrl ?? Url.Content("~/");
+
+            _logger.LogInformation("Login.schtml.cs OnPostAsync returnUrl: " + returnUrl);
 
             if (ModelState.IsValid)
             {
@@ -78,6 +84,7 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
+                    //return Redirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -94,6 +101,8 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                     return Page();
                 }
             }
+
+            _logger.LogInformation("Login.schtml.cs OnPostAsync ModelState not valid");
 
             // If we got this far, something failed, redisplay form
             return Page();

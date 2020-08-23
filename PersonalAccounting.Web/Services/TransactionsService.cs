@@ -24,6 +24,8 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
+                _logger.LogInformation("Enter to TranasctionsService GetTransactionsByBudgetId");
+
                 var response = await _httpClient.GetAsync($"Budgets/{id}/Transactions");
                 if (response.IsSuccessStatusCode)
                 {
@@ -46,6 +48,8 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
+                _logger.LogInformation("Enter to TranasctionsService InsertTransaction");
+
                 var transactionJson = new StringContent(JsonSerializer.Serialize(transaction), Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync($"/api/Transactions", transactionJson);
                 if (!response.IsSuccessStatusCode)

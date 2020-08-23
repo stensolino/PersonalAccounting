@@ -23,6 +23,8 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
+                _logger.LogInformation("Enter to CategoriesService GetCategoriesByBudgetId");
+
                 var response = await _httpClient.GetAsync($"/api/Budgets/{budgetId}/Categories");
                 if (response.IsSuccessStatusCode)
                 {

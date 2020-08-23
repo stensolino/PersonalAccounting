@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Dto;
 using PersonalAccounting.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PersonalAccounting.Api.Controllers
@@ -13,9 +13,12 @@ namespace PersonalAccounting.Api.Controllers
     [ApiController]
     public class TransactionsController : ControllerBase
     {
+        private readonly ILogger<TransactionsController> _logger;
         private readonly ITransactionsService _transactionService;
-        public TransactionsController(ITransactionsService transactionService)
+
+        public TransactionsController(ILogger<TransactionsController> logger, ITransactionsService transactionService)
         {
+            _logger = logger;
             _transactionService = transactionService;
         }
 
@@ -30,6 +33,8 @@ namespace PersonalAccounting.Api.Controllers
         [HttpGet("/api/Budgets/{id}/Transactions")]
         public ActionResult<IEnumerable<TransactionDto>> GetByBudgetId(int id)
         {
+            _logger.LogInformation("Enter to TransactionsController GetByBudgetId");
+
             var transactions = _transactionService.GetByBudgetId(id);
 
             return Ok(transactions);
@@ -39,6 +44,8 @@ namespace PersonalAccounting.Api.Controllers
         [HttpPost]
         public async Task Post([FromBody] Transaction transaction)
         {
+            _logger.LogInformation("Enter to TransactionsController Post");
+
             await _transactionService.Insert(transaction);
         }
 

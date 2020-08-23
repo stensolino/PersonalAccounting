@@ -23,6 +23,8 @@ namespace PersonalAccounting.Web.Services
         {
             try
             {
+                _logger.LogInformation("Enter to BudgetsService GetBudgetsByUserId");
+
                 var response = await _httpClient.GetAsync($"budgets");
                 if (response.IsSuccessStatusCode)
                 {
@@ -43,6 +45,8 @@ namespace PersonalAccounting.Web.Services
 
         public async Task<BudgetDto> GetBudget(int id)
         {
+            _logger.LogInformation("Enter to BudgetsService GetBudget");
+
             try
             {
                 var response = await _httpClient.GetAsync($"budgets/{id}");

@@ -27,16 +27,11 @@ namespace PersonalAccounting.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddCognitoIdentity();
-            //services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddRazorPages();//.AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
-
+            
             services.AddTransient<HttpClientMessageHandlers>();
             services.AddHttpClient(Constants.PersonalAccountingApi, c =>
             {
@@ -67,7 +62,7 @@ namespace PersonalAccounting.Web
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -77,7 +72,6 @@ namespace PersonalAccounting.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapHealthChecks("/health");

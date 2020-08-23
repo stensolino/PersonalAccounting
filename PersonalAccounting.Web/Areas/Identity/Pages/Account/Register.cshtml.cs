@@ -72,10 +72,15 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            _logger.LogInformation("Enter to Register.cshtml.cs OnPostAsync");
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
             if (ModelState.IsValid)
             {
+                _logger.LogInformation("Register.cshtml.cs OnPostAsync ModelState Is Valid");
+
                 var user = _pool.GetUser(Input.Email);
                 user.Attributes.Add(CognitoAttribute.Email.AttributeName, Input.Email);
 
@@ -94,6 +99,7 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                 }
             }
 
+            _logger.LogInformation("Register.cshtml.cs OnPostAsync ModelState Is NOT Valid");
             // If we got this far, something failed, redisplay form
             return Page();
         }
