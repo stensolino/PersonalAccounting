@@ -19,7 +19,7 @@ namespace PersonalAccounting.Web.Services
             _logger = logger;
         }
 
-        public async Task CreateUserAsync(UserDto user)
+        public async Task<long> CreateUserAsync(UserDto user)
         {
             try
             {
@@ -29,12 +29,16 @@ namespace PersonalAccounting.Web.Services
                 var response = await _httpClient.PostAsync("/api/Users", userJson);
                 if (response.IsSuccessStatusCode)
                 {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var userId = JsonSerializer.Deserialize<long>(responseString, _jsonSerializerOptions);
+                    return userId;
                 }
-                // TODO Handle error
+
+                throw new Exception("CreateUserAsync throw an error");
             }
             catch (Exception ex)
             {
-                _logger.LogError("CreateUserAsync throw an error", ex.Message);
+                _logger.LogError(ex.Message);
                 throw;
             }
         }

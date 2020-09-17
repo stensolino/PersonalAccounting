@@ -5,6 +5,6 @@ namespace PersonalAccounting.Api.Services.Interfaces
 {
     public interface IUsersServices
     {
-        Task CreateUserAsync(UserDto user);
+        Task<long> CreateUserAsync(UserDto user);
     }
 }

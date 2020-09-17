@@ -41,8 +41,9 @@ namespace PersonalAccounting.Api.Controllers
 
         // POST api/<BudgetsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] BudgetDto budget)
         {
+            await _budgetsService.Insert(budget);
         }
 
         // PUT api/<BudgetsController>/5

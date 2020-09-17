@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace PersonalAccounting.Api.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -37,11 +36,13 @@ namespace PersonalAccounting.Api.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public async Task Post([FromBody] UserDto user)
+        public async Task<ActionResult<long>> Post([FromBody] UserDto user)
         {
             _logger.LogInformation("Enter to UsersController Post");
 
-            await _usersService.CreateUserAsync(user);
+            var userId = await _usersService.CreateUserAsync(user);
+
+            return userId;
         }
 
         // PUT: api/Users/5

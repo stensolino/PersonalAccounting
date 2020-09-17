@@ -4,6 +4,7 @@ using PersonalAccounting.Web.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -63,6 +64,26 @@ namespace PersonalAccounting.Web.Services
             catch (Exception ex)
             {
                 _logger.LogError("GetBudget throw an error", ex.Message);
+                throw;
+            }
+        }
+
+        public async Task InsertBudget(BudgetDto budget)
+        {
+            try
+            {
+                _logger.LogInformation("Enter to TranasctionsService InsertBudget");
+
+                var budgetJson = new StringContent(JsonSerializer.Serialize(budget), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"/api/Budgets", budgetJson);
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Error on inserting Budget");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
                 throw;
             }
         }

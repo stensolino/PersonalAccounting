@@ -19,12 +19,20 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
     public class ConfirmAccountModel : PageModel
     {
         private readonly CognitoUserManager<CognitoUser> _userManager;
+        private readonly SignInManager<CognitoUser> _signInManager;
         private readonly IUsersServices _usersService;
+        private readonly IBudgetsService _budgetsService;
 
-        public ConfirmAccountModel(UserManager<CognitoUser> userManager, IUsersServices usersServices)
+        public ConfirmAccountModel(
+            UserManager<CognitoUser> userManager,
+            SignInManager<CognitoUser> signInManager,
+            IUsersServices usersServices,
+            IBudgetsService budgetsService)
         {
             _userManager = userManager as CognitoUserManager<CognitoUser>;
+            _signInManager = signInManager as SignInManager<CognitoUser>;
             _usersService = usersServices;
+            _budgetsService = budgetsService;
         }
 
         [BindProperty]
@@ -46,33 +54,32 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/Identity/Account/Login");
             if (ModelState.IsValid)
             {
-                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+                var userIdentityId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
 
-                var user = await _userManager.FindByIdAsync(userId);
-                if (user == null)
+                var userIdentity = await _userManager.FindByIdAsync(userIdentityId);
+                if (userIdentity == null)
                 {
-                    return NotFound($"Unable to load user with ID '{userId}'.");
+                    return NotFound($"Unable to load user with ID '{userIdentityId}'.");
                 }
 
-                var result = await _userManager.ConfirmSignUpAsync(user, Input.Code, true);
+                var result = await _userManager.ConfirmSignUpAsync(userIdentity, Input.Code, true);
+                await _signInManager.SignOutAsync();
+
                 if (!result.Succeeded)
                 {
-                    throw new InvalidOperationException($"Error confirming account for user with ID '{userId}':");
+                    throw new InvalidOperationException($"Error confirming account for user with ID '{userIdentityId}':");
                 }
                 else
                 {
                     // Register user in local db and add default budget for the user
-                    var userBudgets = new List<BudgetDto>();
-                    userBudgets.Add(new BudgetDto { });
                     var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
-                    await _usersService.CreateUserAsync(new UserDto
+                    var userId = await _usersService.CreateUserAsync(new UserDto
                     {
-                        CognitoId = user.UserID,
-                        Email = email,
-                        Budgets = userBudgets
+                        CognitoId = userIdentity.UserID,
+                        Email = email
                     });
 
                     return returnUrl != null ? LocalRedirect(returnUrl) : Page() as IActionResult;

@@ -8,5 +8,6 @@ namespace PersonalAccounting.Web.Services.Interfaces
     {
         Task<List<BudgetDto>> GetBudgetsByUserId();
         Task<BudgetDto> GetBudget(int id);
+        Task InsertBudget(BudgetDto budget);
     }
 }

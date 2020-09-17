@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Domain.Dto;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace PersonalAccounting.Api.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class TransactionsController : ControllerBase
     {

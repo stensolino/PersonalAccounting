@@ -7,5 +7,6 @@ namespace PersonalAccounting.Api.Services.Interfaces
     public interface IBudgetsService
     {
         Task<IEnumerable<BudgetDto>> GetByCognitoUserId(string cognitoUserId);
+        Task Insert(BudgetDto budget);
     }
 }

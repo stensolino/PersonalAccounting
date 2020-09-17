@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using PersonalAccounting.Domain.Dto;
-using PersonalAccounting.Web.Services.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,20 +20,17 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
         private readonly UserManager<CognitoUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly CognitoUserPool _pool;
-        private readonly IUsersServices _usersService;
 
         public RegisterModel(
             UserManager<CognitoUser> userManager,
             SignInManager<CognitoUser> signInManager,
             ILogger<RegisterModel> logger,
-            CognitoUserPool pool,
-            IUsersServices usersService)
+            CognitoUserPool pool)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _pool = pool;
-            _usersService = usersService;
         }
 
         [BindProperty]
@@ -90,7 +85,7 @@ namespace PersonalAccounting.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-
+                    
                     return RedirectToPage("./ConfirmAccount");
                 }
                 foreach (var error in result.Errors)

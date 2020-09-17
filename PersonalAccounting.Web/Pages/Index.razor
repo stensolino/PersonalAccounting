@@ -2,6 +2,7 @@
 @using System.Threading.Tasks;
 @using PersonalAccounting.Domain.Dto;
 @using PersonalAccounting.Web.Services.Interfaces;
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 @page "/"
 
@@ -44,10 +45,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _loading = true;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
 
-        _budgets = await budgetsService.GetBudgetsByUserId();
+        if (user.Identity.IsAuthenticated)
+        {
+            _loading = true;
 
-        _loading = false;
+            _budgets = await budgetsService.GetBudgetsByUserId();
+
+            _loading = false;
+        }
     }
 }

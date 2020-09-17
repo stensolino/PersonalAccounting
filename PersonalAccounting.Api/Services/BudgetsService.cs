@@ -2,6 +2,8 @@
 using PersonalAccounting.Api.Services.Interfaces;
 using PersonalAccounting.Database;
 using PersonalAccounting.Domain.Dto;
+using PersonalAccounting.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +33,20 @@ namespace PersonalAccounting.Api.Services
                 .ToListAsync();
 
             return result;
+        }
+
+        public async Task Insert(BudgetDto budgetDto)
+        {
+            var budget = new Budget
+            {
+                Name = budgetDto.Name,
+                UserId = budgetDto.UserId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            await _dbContext.Budgets.AddAsync(budget);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
